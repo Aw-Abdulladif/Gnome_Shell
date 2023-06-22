@@ -33,6 +33,7 @@ imports.gi.versions.TelepathyGLib = '0.12';
 imports.gi.versions.TelepathyLogger = '0.2';
 imports.gi.versions.UPowerGlib = '1.0';
 
+const Cairo = imports.cairo;
 const Clutter = imports.gi.Clutter;
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
@@ -301,6 +302,16 @@ function init() {
     };
     GObject.Object.prototype.disconnect_object = function (...args) {
         SignalTracker.disconnectObject(this, ...args);
+    };
+
+    Cairo.Context.prototype.setSourceColor = function (color) {
+        const {red, green, blue, alpha} = color;
+        const rgb = [red, green, blue].map(v => v / 255.0);
+
+        if (alpha !== 0xff)
+            this.setSourceRGBA(...rgb, alpha / 255.0);
+        else
+            this.setSourceRGB(...rgb);
     };
 
     SignalTracker.registerDestroyableType(Clutter.Actor);

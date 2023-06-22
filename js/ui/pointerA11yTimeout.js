@@ -69,11 +69,11 @@ var PieTimer = GObject.registerClass({
         cr.closePath();
 
         cr.setLineWidth(0);
-        Clutter.cairo_set_source_color(cr, backgroundColor);
+        cr.setSourceColor(backgroundColor);
         cr.fillPreserve();
 
         cr.setLineWidth(borderWidth);
-        Clutter.cairo_set_source_color(cr, borderColor);
+        cr.setSourceColor(borderColor);
         cr.stroke();
 
         cr.$dispose();

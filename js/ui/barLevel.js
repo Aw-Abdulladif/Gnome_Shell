@@ -2,7 +2,6 @@
 /* exported BarLevel */
 
 const Atk = imports.gi.Atk;
-const Clutter = imports.gi.Clutter;
 const GObject = imports.gi.GObject;
 const St = imports.gi.St;
 
@@ -141,9 +140,9 @@ var BarLevel = GObject.registerClass({
         cr.lineTo(endX, (height + barLevelHeight) / 2);
         cr.lineTo(endX, (height - barLevelHeight) / 2);
         cr.lineTo(width - barLevelBorderRadius - barLevelBorderWidth, (height - barLevelHeight) / 2);
-        Clutter.cairo_set_source_color(cr, barLevelColor);
+        cr.setSourceColor(barLevelColor);
         cr.fillPreserve();
-        Clutter.cairo_set_source_color(cr, barLevelBorderColor);
+        cr.setSourceColor(barLevelBorderColor);
         cr.setLineWidth(barLevelBorderWidth);
         cr.stroke();
 
@@ -154,9 +153,9 @@ var BarLevel = GObject.registerClass({
         cr.lineTo(x, (height + barLevelHeight) / 2);
         cr.lineTo(barLevelBorderRadius + barLevelBorderWidth, (height + barLevelHeight) / 2);
         if (this._value > 0)
-            Clutter.cairo_set_source_color(cr, barLevelActiveColor);
+            cr.setSourceColor(barLevelActiveColor);
         cr.fillPreserve();
-        Clutter.cairo_set_source_color(cr, barLevelActiveBorderColor);
+        cr.setSourceColor(barLevelActiveBorderColor);
         cr.setLineWidth(barLevelBorderWidth);
         cr.stroke();
 
@@ -168,9 +167,9 @@ var BarLevel = GObject.registerClass({
             cr.lineTo(endX, (height + barLevelHeight) / 2);
             cr.lineTo(x, (height + barLevelHeight) / 2);
             cr.lineTo(x, (height - barLevelHeight) / 2);
-            Clutter.cairo_set_source_color(cr, barLevelOverdriveColor);
+            cr.setSourceColor(barLevelOverdriveColor);
             cr.fillPreserve();
-            Clutter.cairo_set_source_color(cr, barLevelOverdriveBorderColor);
+            cr.setSourceColor(barLevelOverdriveBorderColor);
             cr.setLineWidth(barLevelBorderWidth);
             cr.stroke();
         }
@@ -178,9 +177,9 @@ var BarLevel = GObject.registerClass({
         /* end progress bar arc */
         if (this._value > 0) {
             if (this._value <= this._overdriveStart)
-                Clutter.cairo_set_source_color(cr, barLevelActiveColor);
+                cr.setSourceColor(barLevelActiveColor);
             else
-                Clutter.cairo_set_source_color(cr, barLevelOverdriveColor);
+                cr.setSourceColor(barLevelOverdriveColor);
             cr.arc(endX, height / 2, barLevelBorderRadius, TAU * (3 / 4), TAU * (1 / 4));
             cr.lineTo(Math.floor(endX), (height + barLevelHeight) / 2);
             cr.lineTo(Math.floor(endX), (height - barLevelHeight) / 2);
@@ -198,9 +197,9 @@ var BarLevel = GObject.registerClass({
             cr.lineTo(overdriveSeparatorX - overdriveSeparatorWidth / 2, (height + barLevelHeight) / 2);
             cr.lineTo(overdriveSeparatorX - overdriveSeparatorWidth / 2, (height - barLevelHeight) / 2);
             if (this._value <= this._overdriveStart)
-                Clutter.cairo_set_source_color(cr, fgColor);
+                cr.setSourceColor(fgColor);
             else
-                Clutter.cairo_set_source_color(cr, barLevelColor);
+                cr.setSourceColor(barLevelColor);
             cr.fill();
         }
 
